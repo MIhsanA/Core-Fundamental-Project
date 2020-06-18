@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+			{{ form.batting_runs.label }}
+			{{ form.batting_run }}
+			{% if form.batting_run.errors %}
+				{% for error in form.batting_run.errors %}
+				    <span>{{ error }}</span>
+				{% endfor %}
+			{% endif %}
+		<br>
+			{{ form.wickets.label }}
+			{{ form.wickets }}
+			{% if form.wickets.errors %}
+				{% for error in form.wickets.errors %}
+				    <span>{{ error }}</span>
+				{% endfor %}
+		
+			{% endif %}
+		<br>
+			{{ form.match_id.label }}
+			{{ form.match_id }}
+		<br>
+			{{ form.player_id.lable }}
+			{{ form.player_id }}
+		    {{ form.submit }}
+	</form>
+
+{% endblock body_content %}
+
