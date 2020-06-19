@@ -26,13 +26,6 @@ class PlayerForm(FlaskForm):
             ]
     )
 
-    content = StringField('Content',
-            validators = [
-                DataRequired(),
-                Length(min=4, max=100)
-            ]
-    )
-
     submit = SubmitField('Post Content')
 
 class ScoreForm(FlaskForm):
@@ -53,10 +46,28 @@ class ScoreForm(FlaskForm):
                 Length(min=0, max=100)
             ]
     )
-    Player_id = StringField('Player_id',
+    player_id = StringField('Player_id',
             validators = [
                 DataRequired(),
                 Length(min=0, max=100)
             ]
     )
     submit = SubmitField('Post Content')
+
+
+class UpdatePlayerForm(FlaskForm):
+    first_name = StringField('First Name',
+        validators=[
+            DataRequired(),
+            Length(min=4, max=30)
+        ])
+    last_name = StringField('Last Name',
+        validators=[
+            DataRequired(),
+            Length(min=4, max=30)
+        ])
+    email = StringField('Email',
+        validators=[
+            DataRequired(),
+        ])
+    submit = SubmitField('Update')

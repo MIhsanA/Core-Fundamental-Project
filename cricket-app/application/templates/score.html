@@ -3,9 +3,9 @@
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 			{{ form.batting_runs.label }}
-			{{ form.batting_run }}
-			{% if form.batting_run.errors %}
-				{% for error in form.batting_run.errors %}
+			{{ form.batting_runs }}
+			{% if form.batting_runs.errors %}
+				{% for error in form.batting_runs.errors %}
 				    <span>{{ error }}</span>
 				{% endfor %}
 			{% endif %}
@@ -22,7 +22,7 @@
 			{{ form.match_id.label }}
 			{{ form.match_id }}
 		<br>
-			{{ form.player_id.lable }}
+			{{ form.player_id.label }}
 			{{ form.player_id }}
 		    {{ form.submit }}
 	</form>

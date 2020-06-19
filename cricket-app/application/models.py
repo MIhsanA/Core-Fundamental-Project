@@ -22,7 +22,7 @@ class Players(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(150), unique=True)
-    score = db.relationship('Score', backref='play')
+    score = db.relationship('Score', backref='play', lazy=True)
 
     def __repr__(self):
         return ''.join(['PlayerID: ', str(self.id), '\r\n',
