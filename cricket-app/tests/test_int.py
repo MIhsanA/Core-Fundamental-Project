@@ -23,7 +23,7 @@ class TestBase(LiveServerTestCase):
         chrome_options = Options()
         chrome_options.binary_location = "/usr/bin/chromium-browser"
         chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(executable_path="<PATH TO chromedriver executable>", chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="/home/muhammad_786_ihsan/chromedriver", chrome_options=chrome_options)
         self.driver.get("http://localhost:5000")
         db.session.commit()
         db.drop_all()
@@ -37,7 +37,18 @@ class TestBase(LiveServerTestCase):
         response = urlopen("http://localhost:5000")
         self.assertEqual(response.code, 200)
 
+class TestPlayer(TestBase): 
+    def test_player(self):
 
+        self.driver.find_element_by_xpath('/html/body/div/a[3]').click()
+        time.sleep(5)
+        
+        self.driver.find_element_by_xpath('//*[@id="first_name"]').send_keys('Ihsan') 
+        self.driver.find_element_by_xpath('//*[@id="last_name"]').send_keys('Almas')
+        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys('Ihsan@gmail.com')
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click() 
+        time.sleep(5) 
+        assert url_for('home') in self.driver.current_url
 
 
 

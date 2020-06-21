@@ -63,21 +63,21 @@ class TestScore(TestBase):
                     batting_runs=20,
                     wickets=3,
                     match_id=4,
-                    player_id=3
+                
                 ),
                 follow_redirects=True
             )
             self.assertIn(b'20', response.data)
 
-class TestUpdate(Test Base):
+class TestUpdate(TestBase):
     def test_update(self):
         with self.clint:
             response = self.clint.post(
-                    '/update'
+                    '/update',
                     data=dict(
                         first_name="new f name",
                         last_name="new l name",
                         email="new@email.com"
                         ),
                     follow_redirects=True
-
+             self.assertIn(b'20', response.data)
