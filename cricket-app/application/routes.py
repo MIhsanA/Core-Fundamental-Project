@@ -1,5 +1,5 @@
 from application import app, db, bcrypt
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from application.forms import PlayerForm, ScoreForm, UpdatePlayerForm
 from application.models import Players, Score
 
@@ -52,22 +52,18 @@ def player_delete(cur_id):
     db.session.commit()
     return redirect(url_for('home'))
 
-@app.route('/player/update/<int:cur_id>', methods=['GET', 'POST'])
+@app.route('/update/<int:cur_id>', methods=['GET', 'POST'])
 def player_update(cur_id):
     player = Players.query.filter_by(id=cur_id).first()
-    return redirect(url_for('update'))
-
-@app.route('/update', methods=['GET', 'POST'])
-def update():
     form = UpdatePlayerForm()
     if form.validate_on_submit():
         player.first_name = form.first_name.data
         player.last_name = form.last_name.data
-        player.user.email = form.email.data
+        player.email = form.email.data
         db.session.commit()
         return redirect(url_for('home'))
     elif request.method == 'GET':
         form.first_name.data = player.first_name
         form.last_name.data = playerlast_name
         form.email.data = player.email
-    return render_template('update.html', title='update', form=form)
+    return render_template('update.html', title='update',player=player, form=form)

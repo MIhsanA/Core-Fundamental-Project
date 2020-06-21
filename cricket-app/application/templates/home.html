@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body_content %}
+
 <h1>This is Home Page </h1>
 <h3> Player Table </h3>
         <table class="table table-striped">
@@ -17,10 +18,11 @@
                     <td>{{ post.first_name }}	</td>
                     <td>{{ post.last_name }}	</td>
                     <td>{{ post.email }}	</td>
-		    <td><form action="{{ url_for('player_delete', cur_id = post.id ) }}" method="POST" >
+		   	
+		    <td><form action="{{ url_for('player_delete', cur_id=post.id) }}" method="POST" >
 		
 				    <button type="submit">Delete</button></form></td>
-                  <td><form action="{{ url_for('player_update', cur_id = post.id ) }}" method="POST" >
+		    <td><form action="{{ url_for('player_update', cur_id=post.id) }}" method="POST" >
                                     <button type="submit">Update</button></form></td>
                 </tr>
 {% endfor  %}
