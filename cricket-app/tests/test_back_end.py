@@ -24,10 +24,15 @@ class TestBase(TestCase):
         db.session.commit()
         db.drop_all()
         db.create_all()
+    
+        update=Players(first_name='ihsan', last_name='almas', email='ihsan@gmail.com')
+        db.session.add(update)
+        db.session.commit
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+
 
 
 
@@ -70,14 +75,18 @@ class TestScore(TestBase):
             self.assertIn(b'20', response.data)
 
 class TestUpdate(TestBase):
+
+
     def test_update(self):
-        with self.clint:
-            response = self.clint.post(
-                    '/update',
-                    data=dict(
-                        first_name="new f name",
-                        last_name="new l name",
-                        email="new@email.com"
-                        ),
-                    follow_redirects=True
-             self.assertIn(b'20', response.data)
+        with self.client:
+            response = self.client.post(
+                'update/1',
+                data=dict(
+                    first_name="ihsan",
+                    last_name="almas",
+                    email="ihsan@gmail.com"
+                ),
+                follow_redirects=True
+            )
+            self.assertIn(b'ihsan', response.data)
+
